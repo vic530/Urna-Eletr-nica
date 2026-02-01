@@ -12,16 +12,15 @@ const textSeuVoto = document.querySelector('.text-voto');
 const bordaFoto = document.querySelector('.foto-perfil');
 const textN = document.getElementById('textN');
 
+let etapaIndex = 0; // Controle as trocas de cargos
+let etapaAtual = candidatos[etapaIndex];
 
-let etapaAtual = candidatos[0]
 let votoBranco = false;
-let totalVotos = [];
-let valorVoto = '';
+let votos = [];
 
-cargoTexto.textContent = etapaAtual.cargo;
+let estadoVoto = ``;
 
 const digitarNumero = (numero) =>{
-   
     
     if (numeroInput.value.length < etapaAtual.caracteres && votoBranco === false ){
         numeroInput.value += numero;
@@ -38,11 +37,10 @@ const buscarCandidato = () => {
         (item) => item.numero === numeroDigitado
     );
 
+    textSeuVoto.style.visibility = 'visible';
+    mensagem.style.visibility = 'visible';
+
     if(candidato) {
-        textSeuVoto.style.visibility = 'visible';
-        fotoCandidato.style.visibility = 'visible';
-        mensagem.style.visibility = 'visible';
-        bordaFoto.style.visibility = 'visible' 
         nomeCandidato.textContent = candidato.nome;
         fotoCandidato.src = candidato.imagem.url || './assets/img/padrao.jpg';
         mensagem.innerHTML = `
@@ -50,62 +48,105 @@ const buscarCandidato = () => {
             CONFIRMA para CONFIRMAR este voto<br/>
             CORRIGE para REINICIAR este voto
         `
+
+        fotoCandidato.style.visibility = 'visible';
+        bordaFoto.style.visibility = 'visible'
+
+        estadoVoto = candidato 
     } else {
         nomeCandidato.textContent = 'VOTO NULO';
-        fotoCandidato.src = '';
+        fotoCandidato.src = './assets/img/padrao.jpg'; //Foto padrão
         mensagem.textContent = 'NÚMERO IVÁLIDO';
+
         bordaFoto.style.visibility = 'hidden';
-        mensagem.style.visibility = 'visible';
+        
+        
+        estadoVoto = candidato
     }
 
 }
 
 const iniciarEtapa = () => { 
+    etapaAtual = candidatos[etapaIndex];
+    cargoTexto.textContent = etapaAtual.cargo;
+
     votoBranco = false;
 
     numeroInput.value = '';
     nomeCandidato.textContent = '';
     fotoCandidato.src = '';
     numeroInput.value = '';
+
     mensagem.style.visibility = 'hidden';
     textSeuVoto.style.visibility = 'hidden';
     bordaFoto.style.visibility = 'hidden';
     textN.style.visibility = "visible";
+
+    
 }
 
 const botoBranco = () => {
     votoBranco = true;
 
     numeroInput.value = '';
+    nomeCandidato.textContent = 'VOTO EM BRANCO';
+    fotoCandidato.src = '';
+    mensagem.innerHTML = `
+        Aperte a tela:<br/>
+        CONFIRMA para CONFIRMAR este voto<br/>
+        CORRIGE para REINICIAR este voto
+        ` 
+
     textSeuVoto.style.visibility = 'visible';
     mensagem.style.visibility = 'visible';
     textN.style.visibility = "hidden";
     bordaFoto.style.visibility = 'hidden';
-    nomeCandidato.textContent = 'VOTO EM BRANCO';
-    fotoCandidato.src = '';
-    mensagem.innerHTML = `
-            Aperte a tela:<br/>
-            CONFIRMA para CONFIRMAR este voto<br/>
-            CORRIGE para REINICIAR este voto
-            `  
-
+    
 }
 
 const confirmarVoto = () => {
 
- totalVotos.push(valorVoto);
-
-    numeroInput.value = '';
-    nomeCandidato.textContent = '';
-    fotoCandidato.src = '';
-    numeroInput.value = '';
-    mensagem.style.visibility = 'hidden';
-    textSeuVoto.style.visibility = 'hidden';
-    bordaFoto.style.visibility = 'hidden';
-    textN.style.visibility = "visible";
+    if(numeroInput.value.length === etapaAtual.caracteres){
+        votos.push({
+            cargo: etapaAtual.cargo,
+            numero: numeroInput.value,
+            tipo: nomeCandidato.textContent === 'VOTO NULO' ? 'NULO' : 'VALIDO'
+        });
+        avancarEtapa();
+        return;
+    }
     
-    votoBranco = false;
-    valorVoto = '';
+    if (votoBranco){
+        votos.push({
+            cargo: etapaAtual.cargo,
+            tipo: 'BRANCO'
+        });
+
+        avancarEtapa();
+        return;
+
+    } 
+    
+    alert('Digite o número completo ou escolha BRANCO');
+    
+}
+
+const avancarEtapa = () => {
+    etapaIndex++; 
+
+    if (etapaIndex < candidatos.length) {
+        iniciarEtapa()
+    } else {
+        finalizarVotacao();
+    }
+}
+
+const finalizarVotacao = () => {
+     document.querySelector('main').innerHTML = `
+        <h1 style="color:white">FIM</h1>
+        <p style="color:white">VOTO COMPUTADO COM SUCESSO</p>
+    `;
+    console.log(votos);
 }
 
 
@@ -117,18 +158,9 @@ botoes.forEach((botao) => {
         digitarNumero(valorTecla);
     })
 });
-botaoCorrigir.addEventListener('click', () =>{  
-    
-    iniciarEtapa();
-});
-botaoBranco.addEventListener('click', () => {
-
-    botoBranco();
-});
-botaoConfirmar.addEventListener('click', () => {
-    
-    confirmarVoto();
-});
+botaoCorrigir.addEventListener('click', iniciarEtapa);
+botaoBranco.addEventListener('click', botoBranco);
+botaoConfirmar.addEventListener('click', confirmarVoto);
 
   
 
