@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <title>Urna Eletonica</title>
+</head>
+<body>
+    <main>
+        <section class="tela-inicial">
+            <div class="text-voto">
+                <span>Seu voto para </span>
+            </div>
+            <h2 class="cargo">Presidente</h2>
+            <figure class="cartao-perfil">
+                <div class="foto-perfil">
+                    <img id="foto-candidato" src="" alt="Foto de perfil">
+                </div>
+    
+                <figcaption>
+                    <h1 class="nome">
+                        <span id="nome-candidato"></span>
+                    </h1>
+                    <div class="numero">
+                        <label id="textN">Nº</label>  
+                        <input id="numero-candidato" 
+                        type="text"  maxlength="2"
+                        readonly
+                        />
+                        <!--  readonly: não digitando no teclado físico -->
+                    </div>
+                </figcaption>
+            </figure>
+        
+            <div class="mensagem">
+                Aperte a tela:<br/>
+                CONFIRMA para CONFIRMAR este voto<br/>
+                CORRIGE para REINICIAR este voto
+            </div>
+
+        </section>
+
+        <section class="area-teclado">
+            <h2 id="tecaldo" class="text-teclado">TECLADO DE VOTAÇÃO</h2>
+            <div>
+                <div class="teclado">
+                    <button type="button" class="botao" value="1">1</button>
+                    <button type="button" class="botao" value="2">2</button>
+                    <button type="button" class="botao" value="3">3</button>
+                    <button type="button" class="botao" value="4">4</button>
+                    <button type="button" class="botao" value="5">5</button>
+                    <button type="button" class="botao" value="6">6</button>
+                    <button type="button" class="botao" value="7">7</button>
+                    <button type="button" class="botao" value="8">8</button>
+                    <button type="button" class="botao" value="9">9</button>
+                    <button id="botao-0" type="button" class="botao" value="0">0</button>
+                </div>
+
+                <div class="ações">
+                    <button type="button" class="botao-corrigir" >CORRIGIR</button>
+                    <button type="button" class="botao-branco" >BRANCO</button>
+                </div>
+
+                <button type="button" class="botao-confirmar" >CONFIRMAR</button>   
+            </div>
+        </section>
+    </main>
+    <script src="./candidato.js"></script>
+    <script src="./script.js"></script>
+</body>
+</html>
