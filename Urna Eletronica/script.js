@@ -18,7 +18,6 @@ let etapaAtual = candidatos[etapaIndex];
 let votoBranco = false;
 let votos = [];
 
-let estadoVoto = ``;
 
 const digitarNumero = (numero) =>{
     
@@ -52,7 +51,6 @@ const buscarCandidato = () => {
         fotoCandidato.style.visibility = 'visible';
         bordaFoto.style.visibility = 'visible'
 
-        estadoVoto = candidato 
     } else {
         nomeCandidato.textContent = 'VOTO NULO';
         fotoCandidato.src = './assets/img/padrao.jpg'; //Foto padrão
@@ -60,8 +58,6 @@ const buscarCandidato = () => {
 
         bordaFoto.style.visibility = 'hidden';
         
-        
-        estadoVoto = candidato
     }
 
 }
@@ -74,9 +70,8 @@ const iniciarEtapa = () => {
 
     numeroInput.value = '';
     nomeCandidato.textContent = '';
-    fotoCandidato.src = '';
-    numeroInput.value = '';
 
+    fotoCandidato.style.visibility = 'hidden';
     mensagem.style.visibility = 'hidden';
     textSeuVoto.style.visibility = 'hidden';
     bordaFoto.style.visibility = 'hidden';
@@ -85,7 +80,7 @@ const iniciarEtapa = () => {
     
 }
 
-const botoBranco = () => {
+const brancoVoto = () => {
     votoBranco = true;
 
     numeroInput.value = '';
@@ -106,6 +101,12 @@ const botoBranco = () => {
 
 const confirmarVoto = () => {
 
+    if (nomeCandidato.textContent === 'FIM'){
+        etapaIndex = 0;
+        iniciarEtapa()
+        return
+    }
+
     if(numeroInput.value.length === etapaAtual.caracteres){
         votos.push({
             cargo: etapaAtual.cargo,
@@ -121,12 +122,10 @@ const confirmarVoto = () => {
             cargo: etapaAtual.cargo,
             tipo: 'BRANCO'
         });
-
         avancarEtapa();
         return;
-
     } 
-    
+
     alert('Digite o número completo ou escolha BRANCO');
     
 }
@@ -142,10 +141,19 @@ const avancarEtapa = () => {
 }
 
 const finalizarVotacao = () => {
-     document.querySelector('main').innerHTML = `
-        <h1 style="color:white">FIM</h1>
-        <p style="color:white">VOTO COMPUTADO COM SUCESSO</p>
-    `;
+
+    nomeCandidato.textContent = 'FIM';
+    numeroInput.value = '';
+    cargoTexto.textContent = '';
+    mensagem.innerHTML = `
+        Seu voto foi concluído. Pressione 
+        CONFIRMAR para encerrar a votação.
+    `
+    fotoCandidato.style.visibility = 'hidden';
+    textSeuVoto.style.visibility = 'hidden';
+    bordaFoto.style.visibility = 'hidden';
+    textN.style.visibility = 'hidden';
+
     console.log(votos);
 }
 
@@ -159,7 +167,7 @@ botoes.forEach((botao) => {
     })
 });
 botaoCorrigir.addEventListener('click', iniciarEtapa);
-botaoBranco.addEventListener('click', botoBranco);
+botaoBranco.addEventListener('click', brancoVoto);
 botaoConfirmar.addEventListener('click', confirmarVoto);
 
   
