@@ -12,17 +12,38 @@ const textSeuVoto = document.querySelector('.text-voto');
 const bordaFoto = document.querySelector('.foto-perfil');
 const textN = document.getElementById('textN');
 
+const visor = document.getElementById('visor');
+
 let etapaIndex = 0; // Controle as trocas de cargos
 let etapaAtual = candidatos[etapaIndex];
 
 let votoBranco = false;
 let votos = [];
 
+visor.textContent = "_".repeat(etapaAtual.caracteres);
+
+const atualizarVisor = () => {
+    const digitados = numeroInput.value.length;
+    let valoritem = numeroInput.value;
+
+    if ( digitados < etapaAtual.caracteres){
+        let espaco = visor.textContent = "_".repeat(etapaAtual.caracteres - digitados);
+        visor.textContent = valoritem + espaco;
+        visor.style.animation = 'none';
+    } else {
+        visor.textContent = numeroInput.value;
+    }
+}
 
 const digitarNumero = (numero) =>{
-    
+    if (nomeCandidato.textContent === 'FIM'){
+        return
+    }
+
     if (numeroInput.value.length < etapaAtual.caracteres && votoBranco === false ){
         numeroInput.value += numero;
+
+        atualizarVisor();
     } 
     if (numeroInput.value.length === etapaAtual.caracteres){
         buscarCandidato();
@@ -54,7 +75,9 @@ const buscarCandidato = () => {
     } else {
         nomeCandidato.textContent = 'VOTO NULO';
         fotoCandidato.src = './assets/img/padrao.jpg'; //Foto padrão
-        mensagem.textContent = 'NÚMERO IVÁLIDO';
+        mensagem.innerHTML = `Caso CONFIRME, este voto será anulado.<br/>
+            Para corrigir, pressione CORRIGE.
+            `
 
         bordaFoto.style.visibility = 'hidden';
         
@@ -76,11 +99,16 @@ const iniciarEtapa = () => {
     textSeuVoto.style.visibility = 'hidden';
     bordaFoto.style.visibility = 'hidden';
     textN.style.visibility = "visible";
+    visor.style.visibility = 'visible';
 
-    
+    visor.textContent = "_".repeat(etapaAtual.caracteres);
+    visor.style.animation = 'blink 1.5s infinite';
 }
 
 const brancoVoto = () => {
+    if (nomeCandidato.textContent === 'FIM'){
+        return
+    }
     votoBranco = true;
 
     numeroInput.value = '';
@@ -96,17 +124,25 @@ const brancoVoto = () => {
     mensagem.style.visibility = 'visible';
     textN.style.visibility = "hidden";
     bordaFoto.style.visibility = 'hidden';
+    visor.style.visibility = 'hidden';   
     
 }
 
 const confirmarVoto = () => {
 
-    if (nomeCandidato.textContent === 'FIM'){
+     if (nomeCandidato.textContent === 'FIM'){
         etapaIndex = 0;
         iniciarEtapa()
         return
     }
 
+    if (numeroInput.value.length < etapaAtual.caracteres) {
+        mensagem.innerHTML = `Digite o número completo ou escolha BRANCO.`
+        mensagem.style.visibility = 'visible'
+        return
+    
+    }
+   
     if(numeroInput.value.length === etapaAtual.caracteres){
         votos.push({
             cargo: etapaAtual.cargo,
@@ -126,7 +162,6 @@ const confirmarVoto = () => {
         return;
     } 
 
-    alert('Digite o número completo ou escolha BRANCO');
     
 }
 
@@ -153,11 +188,22 @@ const finalizarVotacao = () => {
     textSeuVoto.style.visibility = 'hidden';
     bordaFoto.style.visibility = 'hidden';
     textN.style.visibility = 'hidden';
+    visor.style.visibility = 'hidden';
 
     console.log(votos);
 }
 
+numeroInput.addEventListener('input', () => {
+    const valor = numeroInput.value;
+    const digitados = valor.length;
 
+    if (digitados < etapaAtual.caracteres){
+    const restantes = etapaAtual.caracteres - digitados;
+        visor.textContent = "_".repeat(restantes)
+    } else {
+        visor.textContent = valor;
+    }
+    });
 
 botoes.forEach((botao) => {
     botao.addEventListener('click', () => {
