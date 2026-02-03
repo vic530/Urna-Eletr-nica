@@ -2,7 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Roboto', Arial, sans-serif;
 }
 
 /* Cores Personalizadas */
@@ -47,15 +47,17 @@ main {
 }
 .text-voto {
     visibility: hidden;/*Remove o item, mas mantém o espaço */
+    font-weight: 400;
     font-size: 18px;
     color: var(--branco);
-    text-shadow: 0 0 12px var(--branco);
+    text-shadow: 0 0 8px var(--branco);
     letter-spacing: 1px;
     text-align: left;
 }
 .cargo{
+ font-weight: 500;
  color: var(--ciano);
- text-shadow: 0 0 12px var(--ciano);
+ text-shadow: 0 0 10px var(--ciano);
  margin: 5px 0 5px;
  letter-spacing: 2px;
 }
@@ -81,16 +83,21 @@ figcaption h1 {
     color: var(--branco);
     letter-spacing: 3px;
     margin: 15px 0 0;
-    text-shadow: 0 0 10px var(--branco);
+    text-shadow: 0 0 8px var(--branco);
     text-align: left;
 }
 .nome {
+    font-weight: 500;
     min-height: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
 }
+#nome-candidato {
+    font-weight: 700;
+}
 #visor {
+    font-weight: 500;
     min-height: 70px;
     letter-spacing: 10px;
     animation: blink 1.5s infinite;
@@ -106,9 +113,9 @@ figcaption h1 {
 }
 figcaption .numero {
     font-size: 50px;
-    font-weight: bold;
+    font-weight: 500;
     color: var(--branco);
-    text-shadow: 0 0 12px var(--branco);
+    text-shadow: 0 0 8px var(--branco);
     text-align: left;}
 input {
     pointer-events: none;/* Impede cliques e foco do mouse */
@@ -131,6 +138,7 @@ input::-webkit-inner-spin-button {
 }
 
 .mensagem {
+    font-weight: 400;
     visibility: hidden;
     font-size: 15px;
     color: var(--ciano);
@@ -208,17 +216,19 @@ input::-webkit-inner-spin-button {
 .botao-corrigir {
     background: linear-gradient(45deg, #ff4500, #ff6347); /* Tons de vermelho */
     font-size: 1.2rem;
+    font-weight: 500;
     color: white;
     flex: 1;
     box-shadow: 0 0 15px rgba(255, 69, 0, 0.4);
 }
 .botao-corrigir:hover {
-    box-shadow: 0 0 25px rgba(255, 69, 0, 0.7);
+    box-shadow: 0 0 20px rgba(255, 69, 0, 0.7);
     transform: scale(1.02); /* Leve aumento ao passar o mouse */
 }
 .botao-branco {
     background: linear-gradient(45deg, #ffffff, #f0f0f0);
     font-size: 1.2rem;
+    font-weight: 500;
     color: black;
     flex: 1;
     box-shadow: 0 0 15px rgba(200, 200, 200, 0.4);
@@ -230,6 +240,7 @@ input::-webkit-inner-spin-button {
 .botao-confirmar {
     width: 100%;
     height: 15%;
+    font-weight: 500;
     background: linear-gradient(45deg, #00c853, #b2ff59);
     color: #000;
     font-size: 1.2rem;
