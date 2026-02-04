@@ -83,7 +83,6 @@ figcaption h1 {
     color: var(--branco);
     letter-spacing: 3px;
     margin: 15px 0 0;
-    text-shadow: 0 0 8px var(--branco);
     text-align: left;
 }
 .nome {
@@ -115,7 +114,7 @@ figcaption .numero {
     font-size: 50px;
     font-weight: 500;
     color: var(--branco);
-    text-shadow: 0 0 8px var(--branco);
+    text-shadow: 0 0 3px var(--branco);
     text-align: left;}
 input {
     pointer-events: none;/* Impede cliques e foco do mouse */

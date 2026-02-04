@@ -136,6 +136,15 @@ const confirmarVoto = () => {
         return
     }
 
+    if (votoBranco){
+        votos.push({
+            cargo: etapaAtual.cargo,
+            tipo: 'BRANCO'
+        });
+        avancarEtapa();
+        return;
+    } 
+
     if (numeroInput.value.length < etapaAtual.caracteres) {
         mensagem.innerHTML = `Digite o número completo ou escolha BRANCO.`
         mensagem.style.visibility = 'visible'
@@ -153,14 +162,6 @@ const confirmarVoto = () => {
         return;
     }
     
-    if (votoBranco){
-        votos.push({
-            cargo: etapaAtual.cargo,
-            tipo: 'BRANCO'
-        });
-        avancarEtapa();
-        return;
-    } 
 
     
 }
