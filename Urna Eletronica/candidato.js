@@ -6,25 +6,25 @@ const candidatos = [
             {
                 numero:'33',
                 nome: 'HOMEN ARANHA',
-                imagem: {url:'./assets/img/HOMEM-ARANHA.jpg'}
+                imagem: {url:'./assets/img/img-homen-aranha-1.png'}
             },
 
             {
                 numero: '11',
                 nome: 'BATMAN',
-                imagem: {url: './assets/img/Batman.jpg'}
+                imagem: {url: './assets/img/img-batman-1.png'}
             },
 
             {
                 numero: '22',
                 nome: 'Mulher Maravilha',
-                imagem: {url: './assets/img/Mulher-Maravilha.webp'}
+                imagem: {url: './assets/img/img-mulher-maravilha.png'}
             },
 
              {
                 numero: '44',
                 nome: 'HULK',
-                imagem: {url: './assets/img/hulk.jpg'}
+                imagem: {url: './assets/img/img-hulk-1.png'}
             }
 
         ]
@@ -37,26 +37,26 @@ const candidatos = [
         concorrentes: [
             {
                 numero: '202',
-                nome: 'Duende Verde',
-                imagem: {url:'./assets/img/Doende Verde.png'}
+                nome: 'VENOM',
+                imagem: {url:'./assets/img/img-venom.png'}
             },
             
             {
-                numero: '303',
-                nome:'Curinga',
-                imagem: {url:'./assets/img/Curinga.jpg'}
+                numero: '313',
+                nome:'CORINGA',
+                imagem: {url:'./assets/img/img-coringa.png'}
             },
 
             {
                 numero: '101',
-                nome:'Mulher Gato',
-                imagem: {url:'./assets/img/mulher-gato.jpg'}
+                nome:'Doende Verde',
+                imagem: {url:'./assets/img/ima-doende-verde.png'}
             },
 
             {
-                numero: '404',
+                numero: '414',
                 nome:'THANOS',
-                imagem: {url:'./assets/img/thanos.jpg'}
+                imagem: {url:'./assets/img/img-thanos.png'}
             },
         ]
     }
