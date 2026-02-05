@@ -4,13 +4,13 @@ const candidatos = [
         caracteres: 2,
         concorrentes: [
             {
-                numero:'33',
+                numero:'25',
                 nome: 'HOMEN ARANHA',
                 imagem: {url:'./assets/img/img-homen-aranha-1.png'}
             },
 
             {
-                numero: '11',
+                numero: '75',
                 nome: 'BATMAN',
                 imagem: {url: './assets/img/img-batman-1.png'}
             },
@@ -22,7 +22,7 @@ const candidatos = [
             },
 
              {
-                numero: '44',
+                numero: '92',
                 nome: 'HULK',
                 imagem: {url: './assets/img/img-hulk-1.png'}
             }
@@ -36,19 +36,19 @@ const candidatos = [
         caracteres: 3,
         concorrentes: [
             {
-                numero: '202',
+                numero: '246',
                 nome: 'VENOM',
                 imagem: {url:'./assets/img/img-venom.png'}
             },
             
             {
-                numero: '313',
+                numero: '358',
                 nome:'CORINGA',
                 imagem: {url:'./assets/img/img-coringa.png'}
             },
 
             {
-                numero: '101',
+                numero: '762',
                 nome:'Doende Verde',
                 imagem: {url:'./assets/img/ima-doende-verde.png'}
             },
