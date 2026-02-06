@@ -78,7 +78,7 @@ header h1 {
     
 }
 .aria-personagens {
-    visibility: hidden;
+    
     background: var(--fundo);
     width: 600px;
     height: 800px;
@@ -114,11 +114,59 @@ header h1 {
 }
 
 
+#lista-resultado {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto auto;
+    grid-template-areas:
+        "heroi heroi"
+        "vilao vilao"
+        "branco nulo";
+    color: var(--branco);
+    font-size: 40px;
+    font-weight: bold;
+    list-style-type: none;
+    padding: 25px;
+}
+
+.resultado-heroi {
+    display: flex;
+    align-items: center;
+    grid-area: heroi;
+    color: var(--verde);
+    font-size: 30px;
+}
+
+.resultado-vilao {
+    display: flex;
+    align-items: center;
+    grid-area: vilao;
+    color: var(--roxo);
+    margin-bottom: 10px;
+    font-size: 30px;
+    
+}
+.resultado-branco {
+    grid-area: branco;
+}
+
+.resultado-nulo {
+    grid-area: nulo;
+    text-align: center;
+}
+.img-resultado {
+    width: 300px;
+    height: 300px;
+    margin-right: 50px;
+    border-radius: 10px;
+}
+
+
+
 main {
     flex: 1; 
     width: 100%; 
     display: flex;
-    justify-content: center;
     align-items: center;
 
 }
