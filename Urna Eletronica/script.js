@@ -7,18 +7,28 @@ const botoes = document.querySelectorAll('.botao');
 const botaoCorrigir = document.querySelector('.botao-corrigir');
 const botaoBranco = document.querySelector('.botao-branco');
 const botaoConfirmar = document.querySelector('.botao-confirmar');
+const botaoResultado = document.getElementById('bt-resultado');
+const botaoNovaVotacao = document.getElementById('bt-nova-votacao');
 
 const textSeuVoto = document.querySelector('.text-voto');
 const bordaFoto = document.querySelector('.foto-perfil');
 const textN = document.getElementById('textN');
 
 const visor = document.getElementById('visor');
+const telaR = document.getElementById('resultadosTela');
+const resultadoBrancosNulos = document.getElementById('resultadoBrancosNulos');
+
+let urnaBloqueada = false;
 
 let etapaIndex = 0; // Controle as trocas de cargos
 let etapaAtual = candidatos[etapaIndex];
 
 let votoBranco = false;
 let votos = [];
+
+
+
+
 
 visor.textContent = "_".repeat(etapaAtual.caracteres);
 
@@ -36,6 +46,8 @@ const atualizarVisor = () => {
 }
 
 const digitarNumero = (numero) =>{
+    if (urnaBloqueada) return;
+
     if (nomeCandidato.textContent === 'FIM'){
         return
     }
@@ -54,21 +66,20 @@ const buscarCandidato = () => {
     const numeroDigitado = numeroInput.value; 
     
     const candidato = etapaAtual.concorrentes.find(
-        (item) => item.numero === numeroDigitado
+        item => item.numero === numeroDigitado
     );
-
-    textSeuVoto.style.visibility = 'visible';
-    mensagem.style.visibility = 'visible';
 
     if(candidato) {
         nomeCandidato.textContent = candidato.nome;
-        fotoCandidato.src = candidato.imagem.url || './assets/img/padrao.jpg';
+        fotoCandidato.src = candidato.imagem.url ;
         mensagem.innerHTML = `
             Aperte a tela:<br/>
             CONFIRMA para CONFIRMAR este voto<br/>
             CORRIGE para REINICIAR este voto
         `
 
+        textSeuVoto.style.visibility = 'visible';
+        mensagem.style.visibility = 'visible';
         fotoCandidato.style.visibility = 'visible';
         bordaFoto.style.visibility = 'visible'
 
@@ -79,10 +90,11 @@ const buscarCandidato = () => {
             Para corrigir, pressione CORRIGE.
             `
 
+        textSeuVoto.style.visibility = 'visible';
+        mensagem.style.visibility = 'visible';
         bordaFoto.style.visibility = 'hidden';
         
     }
-
 }
 
 const iniciarEtapa = () => { 
@@ -106,9 +118,12 @@ const iniciarEtapa = () => {
 }
 
 const brancoVoto = () => {
+    if (urnaBloqueada) return;
+
     if (nomeCandidato.textContent === 'FIM'){
         return
     }
+
     votoBranco = true;
 
     numeroInput.value = '';
@@ -121,6 +136,7 @@ const brancoVoto = () => {
         ` 
 
     textSeuVoto.style.visibility = 'visible';
+    fotoCandidato.style.visibility = 'hidden';
     mensagem.style.visibility = 'visible';
     textN.style.visibility = "hidden";
     bordaFoto.style.visibility = 'hidden';
@@ -130,7 +146,9 @@ const brancoVoto = () => {
 
 const confirmarVoto = () => {
 
-     if (nomeCandidato.textContent === 'FIM'){
+    if (urnaBloqueada) return;
+
+    if (nomeCandidato.textContent === 'FIM'){
         etapaIndex = 0;
         iniciarEtapa()
         return
@@ -161,9 +179,7 @@ const confirmarVoto = () => {
         avancarEtapa();
         return;
     }
-    
-
-    
+      
 }
 
 const avancarEtapa = () => {
@@ -185,13 +201,13 @@ const finalizarVotacao = () => {
         Seu voto foi concluído. Pressione 
         CONFIRMAR para encerrar a votação.
     `
+    mensagem.style.visibility = 'visible'
     fotoCandidato.style.visibility = 'hidden';
     textSeuVoto.style.visibility = 'hidden';
     bordaFoto.style.visibility = 'hidden';
     textN.style.visibility = 'hidden';
     visor.style.visibility = 'hidden';
 
-    console.log(votos);
 }
 
 numeroInput.addEventListener('input', () => {
@@ -206,24 +222,191 @@ numeroInput.addEventListener('input', () => {
     }
     });
 
+
+
 botoes.forEach((botao) => {
+
     botao.addEventListener('click', () => {
         const valorTecla = botao.value;
         
         digitarNumero(valorTecla);
-    })
+    });
 });
+
+
+
+const verificarBracoNulo = () => {
+    
+    branco = 0;
+    votorNulo = 0;
+
+    votos.forEach((item) => {
+
+        if (item.tipo === "BRANCO") {
+            branco++
+            console.log(`Votos branco: ${branco}`);
+        }
+        
+        if (item.tipo === "NULO") {
+            votorNulo++
+            console.log(`Voto nulo: ${votorNulo}`)
+        }
+    });
+
+    return { 
+        branco,
+        votorNulo
+    }
+}
+
+const contarVotosPorCargo = (cargo) => {
+    const contagem = {};
+
+    votos.forEach((voto) => {
+
+        if (voto.cargo === cargo && voto.tipo === "VALIDO") {
+
+        const numero = voto.numero;
+
+        if (contagem[numero]) {
+            contagem[numero]++;
+        } else {
+            contagem[numero] = 1;
+        }
+        }
+    });
+
+    return contagem;
+};
+
+const descobrirVencedorPorCargo = (cargo) => {
+
+    const contagem = contarVotosPorCargo(cargo);
+    const bocosNulos = verificarBracoNulo();
+
+    let vencedorNumero = null;
+    let maiorQtd = 0;
+    const totalGeral = votos.length;
+
+        // Descobre quem tem mais votos
+    for (let numero in contagem) {
+        if (contagem[numero] > maiorQtd) {
+        maiorQtd = contagem[numero];
+        vencedorNumero = numero;
+        }
+    }
+        // Soma total de votos válidos
+    const totalVotosValidos = Object.values(contagem).reduce((acumulador, votos) => {
+        return acumulador + votos;
+    }, 0);
+
+        // Calcula a porcentagem correta do vencedor
+    const porcentagemVotos =  totalVotosValidos > 0
+      ? ((maiorQtd / totalVotosValidos) * 100).toFixed(2)
+      : 0;
+
+        // Busca o candidato comoleto
+    const etapa = candidatos.find( c => c.cargo === cargo);
+    
+    const candidatoVencedor = etapa.concorrentes.find(candidato => {
+        return candidato.numero === vencedorNumero
+    })
+
+    // Calcula a porcentagem votos brancos e nulos
+    const brancosPorcentagem = totalGeral > 0 ?
+     ((bocosNulos.branco / totalGeral) * 100).toFixed(1) : 0;
+
+    const nulosPorcentagem = totalGeral > 0 ? 
+    ((bocosNulos.votorNulo / totalGeral) * 100).toFixed(1) : 0;
+
+    return {
+        cargo,
+        candidato: candidatoVencedor,
+        votos: maiorQtd,
+        total: totalVotosValidos,
+        porcentagem: { porcentagemVotos,brancosPorcentagem,nulosPorcentagem}
+    }
+};
+
+const resultadoNaTela = () => {
+
+    
+    const ariaPersonagens = document.querySelector('.aria-personagens');
+    const brancoNuleTela = document.getElementById('resultadoBrancosNulos');
+    
+
+    ariaPersonagens.style.display = 'none';
+   
+    telaR.innerHTML = '';
+    brancoNuleTela.innerHTML = '';
+
+    candidatos.forEach(etapa => {
+        const resultado = descobrirVencedorPorCargo(etapa.cargo)
+        
+        const div = document.createElement('div');
+        div.classList.add('resultado-cargo');
+
+        let conteudo = `<h4>${resultado.cargo}</h4>`;
+
+        if (!resultado.candidato) {
+            conteudo += `
+                <p>Nenhum voto válido.</p>
+            `;
+        } else {
+            conteudo += `
+
+                <img class="img-resultado"
+                    src="${resultado.candidato.imagem.url}"
+                />
+                <p><strong class="resultadoNome">  ${resultado.candidato.nome}</strong></p>
+                <p><strong class="resultadoPorcetagem">votos: ${resultado.porcentagem.porcentagemVotos}%</strong></p>
+            `            
+        }
+
+        brancoNuleTela.innerHTML = `
+            <p><strong class="resutadobraco">Votos brancos: ${resultado.porcentagem.brancosPorcentagem}%</strong> </p>
+            <p><strong class="resutadobraco">Votos nulos: ${resultado.porcentagem.nulosPorcentagem}%<strong></p>
+            `
+
+        div.innerHTML = conteudo;
+        telaR.appendChild(div);
+    });
+    
+}
+
+const novaVotacao = () => {
+    etapaIndex = 0;
+    votos = [];
+    // Esconde tela de resultado
+    const containerResultado = document.getElementById('resultado');
+    containerResultado.style.visibility = 'hidden';
+    // Limpa tela de resultados
+    document.getElementById('resultadosTela').innerHTML = '';
+    document.getElementById('resultadoBrancosNulos').innerHTML = '';
+    // Esconde aria de personagens
+    const ariaPersonagens = document.querySelector('.aria-personagens');
+    ariaPersonagens.style.visibility = 'hidden';
+
+    
+    iniciarEtapa();
+}
+
+
+
 botaoCorrigir.addEventListener('click', iniciarEtapa);
 botaoBranco.addEventListener('click', brancoVoto);
 botaoConfirmar.addEventListener('click', confirmarVoto);
 
+botaoResultado.addEventListener('click', () => {
+    resultado.style.visibility = 'visible';
+    urnaBloqueada = true;
+    resultadoNaTela();
+});
+botaoNovaVotacao.addEventListener('click', () => {
+    urnaBloqueada = false;
+    novaVotacao();
+});
+
   
 
-
-
-
-
-
-
-
-
+ 

@@ -7,15 +7,19 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <title>Urna Eletonica</title>
 </head>
 <body>
     <header>
-       <h1>Eleções Dev</h1>
+       <h2>Eleções Dev</h1>
        <nav class=" nav-tab">
-            <button id="bt-heroi" class="tab">Herói do Ano</button>
-            <button id="bt-vilao" class="tab">Vilão do Ano</button>
+            <button id="bt-heroi" class="tab">HERÓI DO ANO</button>
+            <button id="bt-vilao" class="tab">VILÃO DO ANO</button>
             <button id="bt-resultado" class="tab">RESULTADO URNA</button>
+            <button id="bt-nova-votacao" class="tab">NOVA VOTAÇÃO</button>
        </nav>
     </header>
     
@@ -27,28 +31,17 @@
                 <ul id="lista-personagens">
 
                 </ul>
-                <ul id="lista-resultado">
-
-                     <li class="liResultado resultado-heroi">
-                        <img class="img-resultado" src="./assets/img/img-batman-1.png" />
-                        <p>Herói do Ano! Batman<br>resultado <span>56%</span></p>
-                    </li>
-
-                    <li class="liResultado resultado-vilao">
-                        <img class="img-resultado" src="./assets/img/img-venom.png" />
-                        <p>Vilão do Ano! Venom<br>resultado <span>60%</span></p>
-                    </li>
-
-                    <li class="liResultado resultado-branco">
-                        <p>VOTO EM BRANCO <span>5%</span></p>
-                    </li>
-
-                    <li class="liResultado resultado-nulo">
-                        <p>VOTO NULO <span>7%</span></p>
-                    </li>
-
-                </ul>
             </section>
+
+             <section id="resultado" class="resultado">
+                    <div id="resultadosTela">
+
+                    </div>
+                    <div id="resultadoBrancosNulos">
+
+                    </div>
+             </section>
+
         </div>
         <main>
             <div class="urna-eletronica">

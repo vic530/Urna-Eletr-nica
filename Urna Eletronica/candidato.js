@@ -16,7 +16,7 @@ const candidatos = [
             },
 
             {
-                numero: '22',
+                numero: '50',
                 nome: 'Mulher Maravilha',
                 imagem: {url: './assets/img/img-mulher-maravilha.png'}
             },
@@ -54,7 +54,7 @@ const candidatos = [
             },
 
             {
-                numero: '414',
+                numero: '650',
                 nome:'THANOS',
                 imagem: {url:'./assets/img/img-thanos.png'}
             },

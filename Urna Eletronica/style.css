@@ -26,6 +26,7 @@ body {
 
 
 
+
 header {
     background-color: var(--fundo);
     min-width: 100vw;
@@ -33,16 +34,19 @@ header {
     display: flex;
     align-items: center;
     justify-content:space-between;
-    color: var(--roxo);
+    
 
 }
-header h1 {
+header h2 {
     padding: 5%;
+    font-family:'Press Start 2P','Roboto',Arial;
+    color: var(--roxo);
+
 }
 .nav-tab { 
     width: 60vw;
     display: flex;
-    justify-content:space-between;
+    gap: 25%;
     padding-right: 30%;
 
 }
@@ -50,8 +54,10 @@ header h1 {
     background: none;
     border: none;
     color: var(--rosa);
-    font-size: 20px;
+    font-size: 15px;
     cursor: pointer;
+    font-family:'Press Start 2P','Roboto',Arial;
+
 }
 .tab:hover {
     color: #ffabdb;
@@ -62,8 +68,10 @@ header h1 {
 
 
 
+
 .conteiner {
     height: calc(100vh - 100px); /* desconta o header */
+    width: 100%;
     display: flex;
 }
 
@@ -75,10 +83,9 @@ header h1 {
     justify-content: center;
     align-items: center;
     
-    
 }
 .aria-personagens {
-    
+    visibility: hidden;
     background: var(--fundo);
     width: 600px;
     height: 800px;
@@ -114,51 +121,75 @@ header h1 {
 }
 
 
-#lista-resultado {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: auto auto auto;
-    grid-template-areas:
-        "heroi heroi"
-        "vilao vilao"
-        "branco nulo";
+
+.resultadosTela {
+    width: 100%;
+    height: 100%;
+}
+.resultado-cargo {
+    margin-bottom: 15px;
+    padding: 15px;
+    border: 1px solid #444;
+    border-radius: 6px;
     color: var(--branco);
-    font-size: 40px;
-    font-weight: bold;
-    list-style-type: none;
-    padding: 25px;
+    font-size: 25px;
+                
 }
-
-.resultado-heroi {
+.resultado {
+    visibility: hidden;
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: 1fr;
+    grid-template-areas: 
+        "votosValidos"
+        "bancoNulo"
+    ;
+}
+#resultadosTela {
+    grid-area: votosValidos;
     display: flex;
-    align-items: center;
-    grid-area: heroi;
-    color: var(--verde);
-    font-size: 30px;
+    gap: 20px;
 }
-
-.resultado-vilao {
+#resultadoBrancosNulos {
+    grid-area: bancoNulo;
     display: flex;
-    align-items: center;
-    grid-area: vilao;
-    color: var(--roxo);
-    margin-bottom: 10px;
+    flex-direction: column;
+    color: var(--branco);
     font-size: 30px;
-    
-}
-.resultado-branco {
-    grid-area: branco;
-}
-
-.resultado-nulo {
-    grid-area: nulo;
+    margin-bottom: 15px;
+    padding: 15px;
+    border: 1px solid #444;
+    border-radius: 6px;
     text-align: center;
+}
+
+.resultado-cargo h4 {
+    text-align: center;
+    color: #fed734;
+    font-family:'Press Start 2P','Roboto',Arial;
+    font-size: 20px;
+    padding: 5px;
+
 }
 .img-resultado {
     width: 300px;
     height: 300px;
-    margin-right: 50px;
-    border-radius: 10px;
+    padding: 8px;
+    border-radius: 13px;
+}
+.resultadoNome {
+    color: var(--roxo);
+    font-family:'Press Start 2P','Roboto',Arial;
+    font-size: 20px;
+}
+.resultadoPorcetagem {
+    color: var(--verde);
+    font-family:'Press Start 2P','Roboto',Arial;
+    font-size: 20px;
+}
+.resutadobraco {
+    font-family:'Press Start 2P','Roboto',Arial;
+    color: #b2afaf;
 }
 
 
