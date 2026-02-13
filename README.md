@@ -79,7 +79,8 @@ Manipulação do DOM
 Controle de fluxo da votação
 ---
 
-## Estrutura de Pastas
+##  📂 Estrutura de Pastas
+
 📁 urna-eletronica
  ├── index.html
  ├── style.css
@@ -98,7 +99,7 @@ Melhorar organização de código
 
 Aprender controle de estado em aplicações JavaScript
  ---
-## 📂 Estrutura de Pastas
+##
 👨‍💻 Autor:
     Victor Dantas
 📌 GitHub: https://github.com/vic530
