@@ -14,7 +14,7 @@ A aplicação simula o funcionamento de uma urna eletrônica, permitindo iniciar
 
 ---
 <div align="center">
-  <a href="https://vic530.github.io/Jogo-JokenP-/" target="_blank" rel="noopener noreferrer">
+  <a href="" target="_blank" rel="noopener noreferrer">
     <img src="https://img.shields.io/badge/🔗%20Acessar%20o%20Projeto-1E90FF?style=for-the-badge" alt="Acessar Projeto"/>
   </a>
 </div>
