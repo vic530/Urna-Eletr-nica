@@ -79,14 +79,6 @@ Manipulação do DOM
 Controle de fluxo da votação
 ---
 
-##  📂 Estrutura de Pastas
-
-📁 urna-eletronica
- ├── index.html
- ├── style.css
- ├── script.js
- └── img-readme/
- ---
 ## 🎯 Objetivo do Projeto
 
 Este projeto foi desenvolvido com foco em:
