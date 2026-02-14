@@ -255,6 +255,9 @@ main {
     height: 100%;
     object-fit: cover; /* Mantém a proporção da imagem */
 }
+#foto-candidato {
+    transition: opacity 0.2s ease;
+}
 
 figcaption h1 {
     color: var(--branco);

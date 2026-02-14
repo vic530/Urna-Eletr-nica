@@ -69,9 +69,13 @@ const buscarCandidato = () => {
         item => item.numero === numeroDigitado
     );
 
+    fotoCandidato.src = '';
+    fotoCandidato.style.opacity = 0;
+
     if(candidato) {
         nomeCandidato.textContent = candidato.nome;
         fotoCandidato.src = candidato.imagem.url ;
+        fotoCandidato.style.opacity = 1;
         mensagem.innerHTML = `
             Aperte a tela:<br/>
             CONFIRMA para CONFIRMAR este voto<br/>

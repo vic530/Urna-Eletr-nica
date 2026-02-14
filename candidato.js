@@ -36,13 +36,13 @@ const candidatos = [
         caracteres: 3,
         concorrentes: [
             {
-                numero: '246',
+                numero: '346',
                 nome: 'VENOM',
                 imagem: {url:'./assets/img/img-venom.png'}
             },
             
             {
-                numero: '358',
+                numero: '258',
                 nome:'CORINGA',
                 imagem: {url:'./assets/img/img-coringa.png'}
             },
