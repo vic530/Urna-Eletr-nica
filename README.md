@@ -9,12 +9,12 @@ A aplicação simula o funcionamento de uma urna eletrônica, permitindo iniciar
 ## 🎮 Demonstração do Jogo
 
 <p align="center">
-  <img src="" width="400" alt="">
+  <img src="" width="800" alt="progeto urna eletronica">
 </p>
 
 ---
 <div align="center">
-  <a href="" target="_blank" rel="noopener noreferrer">
+  <a href="https://vic530.github.io/Urna-Eletr-nica/" target="_blank" rel="noopener noreferrer">
     <img src="https://img.shields.io/badge/🔗%20Acessar%20o%20Projeto-1E90FF?style=for-the-badge" alt="Acessar Projeto"/>
   </a>
 </div>
@@ -79,14 +79,6 @@ Manipulação do DOM
 Controle de fluxo da votação
 ---
 
-##  📂 Estrutura de Pastas
-
-📁 urna-eletronica
- ├── index.html
- ├── style.css
- ├── script.js
- └── img-readme/
- ---
 ## 🎯 Objetivo do Projeto
 
 Este projeto foi desenvolvido com foco em:
