@@ -9,7 +9,7 @@ A aplicação simula o funcionamento de uma urna eletrônica, permitindo iniciar
 ## 🎮 Demonstração do Jogo
 
 <p align="center">
-  <img src="img-readme/demo.gif" width="500" alt="Demonstração da Urna Eletrônica">
+  <img src="assets/video/GFI-urna.gif" width="800" alt="Demonstração da Urna Eletrônica">
 </p>
 
 ---
